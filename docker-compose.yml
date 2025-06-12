@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+
+  wireguard-exporter:
+    image: mindflavor/prometheus_wireguard_exporter
+    container_name: wireguard-exporter
+    network_mode: host
+    environment:
+      - WG_JSON=false
+      - WG_SHOW_PATH=/usr/bin/wg
+    volumes:
+      - /usr/bin/wg:/usr/bin/wg:ro
+      - /etc/wireguard:/etc/wireguard:ro
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    expose:
+      - "9090"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    expose:
+      - "3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_PASSWORD}
+      - GF_SERVER_ROOT_URL=http://${HOST_ADDRESS}/grafana/
+    volumes:
+      - ./grafana:/etc/grafana
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-reverse-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped

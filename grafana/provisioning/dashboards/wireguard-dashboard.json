@@ -1,0 +1,19 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [],
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": ["wireguard"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timepicker": {},
+  "timezone": "",
+  "title": "WireGuard VPN Monitoring",
+  "uid": null,
+  "version": 1
+}
