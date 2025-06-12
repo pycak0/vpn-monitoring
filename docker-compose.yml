@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
 
   wireguard-exporter:
-    image: weejewel/wireguard-exporter:latest
+    image: mindflavor/prometheus_wireguard_exporter:3.5.1
     container_name: wireguard-exporter
     network_mode: host
     environment:
