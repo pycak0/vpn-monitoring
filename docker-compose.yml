@@ -3,15 +3,11 @@ version: "3.8"
 services:
 
   wireguard-exporter:
-    image: ghcr.io/mindflavor/prometheus_wireguard_exporter:latest
+    image: weejewel/wireguard-exporter:latest
     container_name: wireguard-exporter
     network_mode: host
     environment:
-      - WG_JSON=false
-      - WG_SHOW_PATH=/usr/bin/wg
-    volumes:
-      - /usr/bin/wg:/usr/bin/wg:ro
-      - /etc/wireguard:/etc/wireguard:ro
+      - WIREGUARD_INTERFACE=wg0
     restart: unless-stopped
 
   prometheus:
