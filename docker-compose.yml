@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   wireguard-exporter:
-    image: mindflavor/prometheus_wireguard_exporter
+    image: ghcr.io/mindflavor/prometheus_wireguard_exporter:latest
     container_name: wireguard-exporter
     network_mode: host
     environment:
